@@ -1,0 +1,42 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+def create_violin_plot(file_path):
+    """
+    Crée un graphique en violon à partir d'un fichier Excel.
+    
+    :param file_path: Chemin vers le fichier Excel contenant les données
+    """
+    try:
+       
+        data = pd.read_csv(file_path, delimiter=';')
+
+        
+        sns.set(style="whitegrid")
+
+       
+        plt.figure(figsize=(10, 6))
+
+        
+        sns.violinplot(data=data, x="treatment", y="frequency_live_bacteria_%", palette="muted")
+
+       
+        plt.title("Violin Plot of Frequency of Live Bacteria by Treatment", fontsize=14)
+        plt.xlabel("Treatment", fontsize=12)
+        plt.ylabel("Frequency of Live Bacteria (%)", fontsize=12)
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+
+       
+        plt.tight_layout()
+        plt.show()
+
+    except Exception as e:
+        print(f"Une erreur s'est produite : {e}")
+
+
+file_path = "data_real.csv"
+
+
+create_violin_plot(file_path)
